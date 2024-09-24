@@ -22,3 +22,13 @@ Answer: High availability and scalability are achieved by using:
 - Multi-region deployments to ensure availability even in case of a regional failure.
 - Managed services like managed databases or serverless computing (e.g., AWS Lambda) for scalability.
 =========================================================
+Q: You notice that your organization’s cloud costs have increased dramatically over the past few months, mainly due to over-provisioned resources in production. What steps would you take to optimize costs?
+A:
+
+- Use cloud cost monitoring tools (e.g., AWS Cost Explorer, Azure Cost Management) to identify the most expensive resources.
+- Right-size instances or resources based on actual utilization, reducing over-provisioned compute, storage, and network resources.
+- Implement auto-scaling for workloads to adjust resources dynamically based on demand.
+- Review reserved instances or savings plans to get discounts for predictable workloads.
+- Check for unused resources (e.g., idle VMs, unused disks) and terminate or decommission them.
+- Set up resource tagging and budgeting policies to track and control costs more effectively in the future.
+=========================================================

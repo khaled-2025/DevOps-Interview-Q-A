@@ -1,5 +1,14 @@
 CICD:
+=========================================================
+Question: What is Continuous Integration, and why is it important?
 
+Answer:
+Continuous Integration (CI) is the practice of automatically integrating code changes from multiple developers into a shared repository several times a day. It involves automated builds and tests to ensure that new code doesn’t break the application. CI reduces integration problems, allows for earlier detection of bugs, and speeds up development.
+=========================================================
+Question: How does Continuous Delivery differ from Continuous Deployment? 
+
+Answer: Continuous Delivery (CD) automates the release process so that code changes can be deployed to production at any time with minimal effort, but the deployment is still a manual decision. Continuous Deployment takes it a step further by automatically deploying every change that passes all tests to production.
+=========================================================
 What is a CI/CD pipeline security best practice?
 
 Answer: Security best practices include:

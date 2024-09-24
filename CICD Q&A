@@ -1,0 +1,18 @@
+CICD:
+
+What is a CI/CD pipeline security best practice?
+
+Answer: Security best practices include:
+
+- Using secrets management tools (e.g., HashiCorp Vault, AWS Secrets Manager) for sensitive data.
+- Scanning code and dependencies for vulnerabilities during the build process.
+- Enforcing RBAC and least privilege access for build and deployment systems.
+- Using secure artifact repositories to store build outputs.
+=========================================================
+Q: How do you ensure that your CI/CD pipeline is secure?
+A:
+
+- Use Secret Management Tools: Store sensitive information securely.
+- Implement Access Controls: Limit who can trigger builds and deploy to production.
+- Code Scanning: Integrate static and dynamic code analysis tools into the pipeline.
+- Audit Logs: Maintain logs for all pipeline activities for auditing.

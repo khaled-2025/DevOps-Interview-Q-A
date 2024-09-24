@@ -1,0 +1,24 @@
+AWS Cloud Platform: 
+=========================================================
+Q: what is the Difference between IAM Role and IAM User.
+A:
+
+IAM Role: Used for granting permissions to AWS services (e.g., EC2, Lambda) or users from other AWS accounts. It’s ideal for temporary credentials.
+IAM User: A permanent identity with a set of credentials for managing AWS resources. Use roles for services or cross-account access; use users for individuals who need AWS management console access.
+=========================================================
+Vertical vs. Horizontal Scaling in AWS?
+A:
+
+- Vertical Scaling: Adding more resources (e.g., CPU, RAM) to a single instance (e.g., moving from a t2.micro to t2.large).
+- Horizontal Scaling: Adding more instances of the same resource type (e.g., launching multiple t2.micro instances in an Auto Scaling group).
+Implementation: Use Auto Scaling for horizontal scaling; for vertical scaling, resize the instance type.
+=========================================================
+Question: How do you ensure high availability and scalability in cloud environments?
+
+Answer: High availability and scalability are achieved by using:
+
+- Auto-scaling groups to automatically adjust the number of instances based on load.
+- Load balancers to distribute traffic across multiple instances.
+- Multi-region deployments to ensure availability even in case of a regional failure.
+- Managed services like managed databases or serverless computing (e.g., AWS Lambda) for scalability.
+=========================================================

@@ -1,0 +1,180 @@
+Question: A web service running on your server becomes unreachable from the internet, but you can still SSH into the server. How do you troubleshoot the issue?
+A: 
+
+- Verify the web service is running with systemctl status <service> or by checking the running processes (ps -aux | grep <service>).
+- Ensure the firewall is correctly configured using iptables, firewalld, or ufw, and check for any rules blocking HTTP/HTTPS traffic.
+- Use netstat -tulnp or ss -tulnp to verify the web service is listening on the correct port.
+- Check the server’s network interfaces and routes using ip addr and ip route to ensure no misconfigurations.
+- Test connectivity with ping and traceroute to isolate network issues between the server and clients.
+- Check any load balancers, proxies, or external DNS for misconfigurations or outages.
+=========================================================
+Question: Your system shows there is free disk space, but when trying to create new files, you receive an error stating, "No space left on device." What could be the cause of this issue, and how would you resolve it?
+Answer:
+
+- Possible Cause: Even though the disk shows free space, the issue might be related to inode exhaustion. Inodes are data structures that store information about files. If the system runs out of inodes, no new files can be created, even if there is free space.
+
+- Solution:
+
+- Check the inode usage with df -i. If inodes are 100% used, this is likely the cause.
+- Locate directories with a high number of small files using find / -xdev -printf '%h\n' | sort | uniq -c | sort -k 1 -n.
+- Delete or consolidate unnecessary files, particularly in directories with many small files.
+- Consider reformatting the disk with more inodes or migrating data to a different partition with a higher inode count.
+=========================================================
+Question:
+Explain the different stages of the Linux boot process.
+
+Answer: The Linux boot process consists of five stages:
+
+- BIOS/UEFI: Initializes the hardware and loads the boot loader.
+- Boot Loader (GRUB): Loads the kernel into memory.
+- Kernel: Initializes the hardware and mounts the root file system.
+- init/systemd: Starts the init process (like systemd) which initializes the user space.
+- Runlevel/Target: Executes scripts to start system services, bringing the system to the desired runlevel or target.
+=========================================================
+What is the purpose of the /etc/fstab file?
+
+Answer:
+The /etc/fstab file contains information about disk drives and partitions and how they should be mounted. It defines where devices should be mounted into the filesystem hierarchy and with which options.
+=========================================================
+Question:
+What is the difference between hard links and soft links in Linux?
+
+Answer: A hard link is a direct pointer to the data on the disk, and multiple hard links to a file share the same inode. Deleting the original file does not affect the hard link. A soft link (or symbolic link) is a pointer to the original file's path, and if the original file is deleted, the symlink becomes broken.
+=========================================================
+Question:
+Explain the use of cron and at in Linux.
+
+Answer: cron is used to schedule recurring tasks at specific intervals (e.g., daily, weekly). at is used to schedule a one-time task to run at a specific time in the future. For example, use crontab -e to edit cron jobs and at 10:00 tomorrow to schedule a one-time task.
+=========================================================
+Question:
+How would you find which process is using a specific port?
+
+Answer: Use the netstat -tuln | grep <port> or ss -tuln | grep <port> command to find the service using the port, followed by lsof -i :<port> or netstat -tulnp | grep <port> to identify the process ID (PID). The fuser <port>/tcp command can also be used to find the PID.
+=========================================================
+Question:
+What are inodes in Linux, and how are they used?
+
+Answer: An inode is a data structure on a filesystem that stores information about a file or directory (e.g., permissions, ownership, size, and location on the disk). The ls -i command can be used to display the inode number of files.
+=========================================================
+Question:
+What is the purpose of the /etc/passwd and /etc/shadow files?
+
+Answer: The /etc/passwd file stores user account information (username, UID, GID, home directory, and shell). The /etc/shadow file stores encrypted password information and account expiration details. The shadow file is readable only by the root user for security
+=========================================================
+Question:
+What are runlevels in Linux?
+
+Answer: Runlevels are different states or modes of operation for the system, defined by which services or daemons are running. Traditional runlevels are 0 (halt), 1 (single-user mode), 3 (multi-user mode with networking), 5 (multi-user mode with GUI), and 6 (reboot). With systemd, these are replaced by "targets" like multi-user.target and graphical.target.
+
+=========================================================
+Q: One of your applications on a Linux server is consuming an increasing amount of memory over time and eventually crashes. How would you investigate and mitigate this issue?
+A:
+
+- Monitor the memory usage with top, htop, or free -m to verify the application’s memory consumption.
+- Use ps aux --sort=-%mem to identify memory-hogging processes.
+- Investigate the application logs to see if there are errors, or use dmesg for kernel logs.
+- Use valgrind or gdb to analyze the application for memory leaks, especially if it’s a custom-developed app.
+- If the leak is confirmed, consider restarting the service periodically as a temporary measure while fixing the code.
+- Adjust system parameters like vm.swappiness to allow more aggressive swapping if needed until the leak is fixed.
+=========================================================
+Q: How would you troubleshoot high CPU usage on a Linux server?
+A: 
+
+- Check Running Processes: Use top, htop, or ps aux to identify processes consuming high CPU resources.
+- Analyze Load Averages: Check uptime or top for load averages to determine if the server is overloaded.
+- Investigate Resource-Intensive Applications: Examine logs for any misbehaving applications or services.
+- Adjust System Configurations: Tune the kernel parameters or optimize the application for better performance.
+- Optimize Scheduling: Prioritize or renice processes as necessary to balance CPU allocation.
+=========================================================
+Q: What steps would you take to troubleshoot memory leaks in a system?
+A:
+
+- Monitor Memory Usage: Use free, vmstat, top, or htop to monitor memory and swap usage.
+- Check for Leaking Processes: Use tools like ps aux, pmap, or valgrind to identify processes that are consuming excessive memory over time.
+- Analyze System Logs: Investigate system logs (/var/log/messages, /var/log/syslog) for memory-related errors.
+- Restart Leaking Processes: If a specific process is causing the leak, restarting or replacing it with a more optimized version might be necessary.
+=========================================================
+Q: How would you go about troubleshooting a disk I/O bottleneck?
+A:
+
+- Check Disk I/O Stats: Use iostat, iotop, or vmstat to monitor disk read/write operations.
+- Analyze Disk Usage: Run df or du to check for full or near-full partitions.
+- Examine Inodes Usage: Check for inode exhaustion using df -i.
+- Optimize I/O Operations: Balance read/write operations, and reduce disk-intensive tasks. Consider SSDs for better performance if necessary.
+- Implement Caching: Use caching strategies (like Redis, Memcached) to reduce disk load.
+=========================================================
+Q: Explain how memory is managed in Linux.
+A: Memory management in Linux involves:
+
+- Physical and Virtual Memory: Linux uses virtual memory management to allow processes to use more memory than physically available by swapping inactive pages to disk.
+- Page Cache: Frequently accessed files and processes are stored in memory for faster access.
+- Swapping: When physical memory is full, Linux swaps less-used data to disk, freeing up memory for active processes.
+- OOM Killer: If memory runs out, the Out-Of-Memory (OOM) killer terminates the process consuming the most memory to prevent system crashes.
+=========================================================
+Q: How would you check disk usage and monitor disk performance?
+A:
+
+- Disk Usage: Use df to check disk space usage and du to check directory-level usage.
+- Disk Performance: Use iostat to monitor I/O performance, including read/write speeds and IOPS (Input/Output Operations Per Second).
+- SMART Monitoring: Use smartctl to check the health of the disk and monitor for potential failures.
+=========================================================
+Q: Explain the OSI Model and its layers.
+A: The OSI Model is a conceptual framework used to understand network interactions in seven distinct layers:
+
+- Layer 1: Physical Layer: Deals with the physical connection between devices (e.g., cables, switches).
+- Layer 2: Data Link Layer: Handles data transfer between two devices on the same network (e.g., MAC addresses, switches).
+- Layer 3: Network Layer: Responsible for packet forwarding and routing (e.g., IP addresses, routers).
+- Layer 4: Transport Layer: Ensures reliable data transfer (e.g., TCP/UDP).
+- Layer 5: Session Layer: Manages and controls connections between computers (e.g., NetBIOS).
+- Layer 6: Presentation Layer: Ensures data is in a readable format (e.g., encryption, translation).
+- Layer 7: Application Layer: Interfaces directly with the application (e.g., HTTP, FTP).
+=========================================================
+Q: What is the difference between TCP and UDP? Which is used in which scenarios?
+
+A: 
+
+- TCP (Transmission Control Protocol): A connection-oriented protocol that ensures reliable data transfer with error-checking and acknowledgment. It’s used for applications requiring data integrity, such as web browsing (HTTP/HTTPS), file transfer (FTP), and email (SMTP).
+- UDP (User Datagram Protocol): A connectionless protocol that does not guarantee delivery or error checking, making it faster and more efficient for real-time applications like video streaming, VoIP, and online gaming.
+=========================================================
+Q: How does NAT (Network Address Translation) work in networking?
+
+A: NAT allows a device with a private IP address to communicate with external networks by translating the private IP address into a public IP address. This enables multiple devices on a local network to share a single public IP address when accessing the internet. NAT is typically used in routers and firewalls to conserve public IP addresses.
+=========================================================
+Q: What are the different types of IP addresses, and what are their uses?
+A:
+
+- Public IP: A globally unique IP address that can be routed on the internet, assigned by ISPs.
+- Private IP: IP addresses reserved for use within private networks (e.g., 192.168.0.0/16). These are not routable on the internet and require NAT for external communication.
+- Static IP: A fixed IP address that does not change over time.
+- Dynamic IP: An IP address that is assigned by a DHCP server and can change over time.
+=========================================================
+Q: What is DNS, and how does it work?
+
+A: DNS (Domain Name System) is a hierarchical system that translates human-readable domain names (e.g., www.example.com) into machine-readable IP addresses (e.g., 192.0.2.1). When a user enters a domain name into their browser, the DNS resolver queries DNS servers to find the corresponding IP address, enabling the user to access the website.
+=========================================================
+Q: Explain the different types of DNS records and their purposes.
+A:
+
+- A Record: Maps a domain name to an IPv4 address.
+- AAAA Record: Maps a domain name to an IPv6 address.
+- CNAME Record: Alias record that points one domain to another domain.
+- MX Record: Specifies the mail servers responsible for receiving email for the domain.
+- TXT Record: Holds arbitrary text data, often used for verifying domain ownership or implementing security features like SPF, DKIM, or DMARC.
+=========================================================
+Q: What is DNS caching, and how does it improve performance?
+
+A: DNS caching temporarily stores DNS query results on the local machine or DNS server to reduce the time it takes to resolve subsequent requests for the same domain name. This improves performance by reducing the need for repetitive DNS lookups and lowering latency in domain resolution.
+=========================================================
+Q: How would you identify and resolve a performance bottleneck in a Linux server that's running multiple services (e.g., database, web server, caching services) simultaneously?
+
+A:
+Identifying performance bottlenecks on a Linux server involves a multi-step approach:
+
+- Monitor System Performance: Begin by using tools like top, htop, atop, and vmstat to gather data on CPU, memory, I/O, and network usage.
+- Identify CPU Bottlenecks: Use perf, mpstat, and sar to profile the CPU and find out if a specific service is over-utilizing CPU resources.
+- Identify Memory Issues: Monitor swap usage using free, vmstat, or smem. Use ps aux --sort=-%mem to identify memory hogs. Look for memory leaks using valgrind or memstat.
+- Disk I/O Bottlenecks: Use iostat, iotop, and dd to monitor disk throughput. Identify processes causing heavy I/O load and optimize database queries, file system configurations (e.g., ext4 vs. xfs), or even upgrade the storage (e.g., SSD vs. HDD).
+- Network Bottlenecks: Use iftop, netstat, or ss to examine network throughput and connections. You may need to check for packet loss, improper routing, or network congestion.
+- Service-Specific Optimization: Each service can be optimized by adjusting configuration settings. For example, tune the database (e.g., by optimizing queries, adjusting memory buffers in MySQL/PostgreSQL) or the web server (adjusting worker processes/threads in Nginx/Apache).
+Resolution may involve reconfiguring services, upgrading hardware, using load balancing, containerizing services, or even scaling horizontally.
+=========================================================

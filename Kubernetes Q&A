@@ -218,7 +218,24 @@ Pod security policies: Pod security policies allow you to restrict the capabilit
 Secret management: Kubernetes provides a built-in secret management system that allows you to store sensitive information, such as passwords and tokens, securely.
 
 By implementing these security features, you can make your Kubernetes cluster more secure and protect your pods and services from unauthorized access.
+=================================================
+Question: You notice that pods in your Kubernetes cluster are taking a long time to get scheduled. How do you diagnose and resolve this issue?
 
+Answer:
 
+- Possible Causes:
+
+- Resource constraints: Not enough CPU or memory available in the cluster.
+- Pod affinity/anti-affinity rules, node selector constraints, or taints/tolerations preventing scheduling.
+- Cluster autoscaler delays or failures to provision new nodes.
+
+- Solution:
+
+-Use kubectl get events to check for scheduling issues or resource constraints.
+- Use kubectl describe pod <pod-name> to see the scheduling logs and any errors.
+- Review node resource usage with kubectl top nodes and ensure there is enough capacity.
+- Check affinity/anti-affinity rules and taints/tolerations for misconfigurations that might be blocking pod placement.
+- Investigate if the autoscaler is functioning correctly by checking the logs and scaling policies.
+=================================================
 
 

@@ -1,0 +1,68 @@
+Terraform:
+=========================================================
+What is a Terraform module, and why would you use it? 
+A:
+
+- A Terraform module is a self-contained set of Terraform configuration files that are designed to be reusable. Modules allow you to abstract and encapsulate resource configurations, making it easier to manage infrastructure across multiple environments. Modules also promote code reusability and reduce duplication by allowing you to define resources once and use them in different contexts.
+=========================================================
+Q: how to Import Manually created resource outside Terraform into Terraform management.
+A:
+Use terraform import to bring the existing resource under Terraform management. This allows you to manage it within the configuration without destroying and recreating it.
+=========================================================
+Q: how to Secure state files in Terraform.
+A:
+Store state files securely in a remote backend like AWS S3, with versioning and encryption enabled. For security, enable multi-factor authentication (MFA) and use AWS IAM roles and policies for access control.
+=========================================================
+Explain the main components of Terraform. 
+A:
+
+- Providers: Responsible for interacting with cloud platforms and APIs. Each provider offers a set of resources and data sources for that platform (e.g., AWS, Azure, GCP, etc.).
+- Resources: The most important element in Terraform configuration, defining what infrastructure components should be provisioned (e.g., virtual machines, networks, storage).
+- Modules: A group of resources combined together to make them reusable, which allows for modularization and organization of configurations.
+- State: Terraform stores the state of the managed infrastructure, allowing it to understand what changes need to be applied.
+=========================================================
+What is Terraform state, and why is it important? 
+A:
+- Terraform state is a file that keeps track of the infrastructure managed by Terraform. It stores the mapping between the resources defined in the configuration files and the real infrastructure. The state file is crucial for Terraform to understand the current state of resources and to determine what changes to make when you run terraform apply. Without state, Terraform would not know what resources exist, what properties they have, or how to update them correctly.
+=========================================================
+What are Terraform providers, and how do they work? 
+A:
+Terraform providers are plugins that enable Terraform to manage various types of infrastructure. Providers act as an abstraction layer over APIs, making it possible to provision and manage resources across multiple platforms (e.g., AWS, Azure, Google Cloud, Kubernetes, etc.). Each provider has its own set of resources that you can use in your configuration.
+=========================================================
+What is a Terraform backend, and what are its types?
+A:
+
+- A Terraform backend determines where and how Terraform's state file is stored. It can be stored locally on disk, or remotely in a variety of systems such as Amazon S3, Google Cloud Storage, Azure Blob Storage, or even in Terraform Cloud. The backend can also be used to enable locking and provide collaboration features when working in a team.
+
+Types of backends:
+
+- Local Backend: Stores the state file on the local disk.
+- Remote Backend: Stores the state file on a remote service (e.g., S3, Azure Blob, Terraform Cloud).
+- Enhanced Backend: Provides additional features such as state locking, versioning, and team collaboration.
+=========================================================
+What are Terraform workspaces, and how do they work?
+A:
+
+- Terraform workspaces allow you to manage multiple environments (e.g., development, staging, production) within the same configuration by separating state files. Each workspace has its own state, so you can run the same configuration across different environments without interfering with each other.
+=========================================================
+What is Terraform taint and how is it used? 
+A:
+
+- Terraform taint is a command used to mark a resource for recreation. When a resource is tainted, Terraform will destroy and then recreate the resource during the next terraform apply. This is useful when you want to force a particular resource to be rebuilt, even if Terraform doesn't detect any changes in its configuration.
+=========================================================
+What are data sources in Terraform, and when would you use them?
+A:
+
+- Data sources allow Terraform to fetch information from outside Terraform or from other configurations. This information can be used to reference existing infrastructure that is not managed by Terraform, or to use dynamic data as input to Terraform resources.
+=========================================================
+What is the difference between terraform plan and terraform apply? 
+A:
+
+terraform plan: Generates an execution plan, showing what actions Terraform will take to bring the infrastructure to the desired state, but does not apply any changes. It provides a preview of the changes without making any modifications.
+terraform apply: Applies the changes described in the execution plan generated by terraform plan. It will create, update, or destroy resources to achieve the desired state of the infrastructure.
+=========================================================
+Explain the purpose of the terraform import command. 
+A:
+
+The terraform import command is used to bring existing infrastructure into Terraform management. It allows you to import resources that were created outside of Terraform (e.g., manually in the cloud provider console) into the Terraform state, so that Terraform can manage them going forward.
+=========================================================

@@ -1,0 +1,38 @@
+Ansible:
+=========================================================
+What is Ansible, and how does it work? 
+A:
+Ansible is an open-source automation tool used for configuration management, application deployment, task automation, and orchestration. It uses a simple syntax written in YAML, known as playbooks, to describe the automation tasks. Ansible works by connecting to your nodes via SSH (or WinRM for Windows) and pushing small programs called Ansible modules to them. These modules run the automation tasks and then remove themselves after completion. Ansible is agentless, meaning it does not require any software to be installed on the nodes it manages.
+=========================================================
+What are Ansible facts?
+A:
+
+Ansible facts are system properties gathered by the setup module in Ansible. Facts provide detailed information about the managed nodes, such as IP addresses, OS types, memory usage, disk information, network interfaces, and more. These facts are automatically collected when a playbook runs and can be used within tasks and playbooks to make decisions or configure resources dynamically.
+=========================================================
+What is Ansible Galaxy?
+A:
+
+Ansible Galaxy is a public repository for sharing Ansible roles. It allows users to discover, download, and share roles written by the community or by specific teams. Roles in Ansible Galaxy are pre-configured tasks or sets of tasks that can be reused across projects. You can install roles directly from Galaxy using the ansible-galaxy command.
+=========================================================
+What are handlers in Ansible, and when would you use them?
+A:
+
+Handlers are special tasks in Ansible that are triggered by other tasks when a change occurs. Handlers are commonly used for tasks like restarting services after a configuration change has been made. They are executed only when notified by other tasks, ensuring that services or systems are restarted or reloaded only when necessary.
+=========================================================
+What is an Ansible playbook? 
+A:
+An Ansible playbook is a YAML file that defines a series of tasks to be performed on managed hosts. Playbooks are used to manage configurations, deploy applications, and orchestrate complex workflows. Playbooks can include tasks, variables, handlers, and roles and can be reused across multiple environments
+=========================================================
+Q: how to manage secrets in Ansible.
+Answer:
+Use ansible-vault to encrypt sensitive data such as passwords, API keys, or confidential information within playbooks and variable files. This ensures that sensitive data is not stored in plain text within version control or shared environments. Ansible Vault can encrypt individual files or specific variables within playbooks.
+=========================================================
+What are Ansible roles, and how do you use them? 
+A:
+Ansible roles are a way of organizing playbooks and tasks into reusable, modular components. Roles help break down complex configurations into simpler files and directories, making them easier to manage and maintain. Roles typically contain tasks, handlers, variables, files, templates, and other resources needed for automation.
+=========================================================
+How do you manage Ansible configurations across different environments (dev, stage, prod)?
+A:
+
+Ansible configurations for different environments can be managed using separate inventory files, variable files, and playbooks. Best practices include creating environment-specific directories and using group_vars and host_vars to define environment-specific variables. Additionally, roles and tasks can be organized to handle environment-specific configurations.
+=========================================================

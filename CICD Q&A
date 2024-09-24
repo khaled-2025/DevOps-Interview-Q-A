@@ -25,3 +25,13 @@ A:
 - Implement Access Controls: Limit who can trigger builds and deploy to production.
 - Code Scanning: Integrate static and dynamic code analysis tools into the pipeline.
 - Audit Logs: Maintain logs for all pipeline activities for auditing.
+=========================================================
+Q: Your CI/CD pipeline has started failing at the build stage. The error message mentions a missing dependency that was present before. How would you troubleshoot and resolve the issue?
+A:
+
+- Review the pipeline logs to identify the exact missing dependency and when it started failing.
+- Check if there were recent changes to the build environment, such as updated dependencies, removed libraries, or changes to the build scripts.
+- Ensure the build agent or Docker image used in the pipeline still has the correct environment or dependencies installed.
+- If the issue is due to external dependency changes (e.g., a deprecated package), update the build script or lock dependencies to a specific version.
+- Rollback the pipeline to a previous working state and apply fixes incrementally.
+=========================================================

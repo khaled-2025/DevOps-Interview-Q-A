@@ -1,0 +1,15 @@
+Question: What is DevOps, and why is it important? Answer: DevOps is a cultural and technical practice that bridges the gap between software development (Dev) and IT operations (Ops). It focuses on collaboration, automation, and continuous delivery to enhance the efficiency, reliability, and quality of software development and delivery. It’s important because it enables faster releases, reduces human errors, improves scalability, and increases the overall quality of products.
+=========================================================
+Question: What are the key DevOps principles? Answer: The key principles of DevOps include:
+
+1. Collaboration: Bridging gaps between development and operations teams.
+2. Automation: Automating repetitive tasks such as builds, testing, and deployments.
+3. Continuous Integration and Continuous Delivery (CI/CD): Ensuring that code changes are automatically integrated, tested, and deployed.
+4. Infrastructure as Code (IaC): Managing infrastructure through code to automate provisioning and scaling.
+5. Monitoring and Feedback: Continuously monitoring systems and gathering feedback for improvement.
+=========================================================
+Question: What is the difference between declarative and imperative IaC?
+
+- Declarative: You specify the desired state of the infrastructure, and the IaC tool figures out how to achieve that state (e.g., Terraform).
+- Imperative: You define the steps to achieve a specific configuration (e.g., using Ansible playbooks or scripting).
+=========================================================

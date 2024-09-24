@@ -1,0 +1,11 @@
+Git:
+
+Question:
+Explain the difference between git merge and git rebase.
+
+Answer: git merge combines changes from one branch into another, creating a merge commit that keeps the history of both branches. git rebase moves or combines a sequence of commits to a new base commit, making the history linear. Use merge for a clear history of branch interactions, and rebase for a cleaner, linear history.
+=========================================================
+Scenario:
+You mistakenly committed sensitive information. How would you remove it from all branches?
+
+Answer: Use git filter-branch or the newer git filter-repo to remove the sensitive data from all commits, and force-push the changes with git push --force. Also, consider rotating the compromised credentials.
